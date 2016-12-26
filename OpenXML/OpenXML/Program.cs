@@ -13,20 +13,26 @@ namespace OpenXML
             {
                 Report report = new Report();
 
-                var _employees = new List<Employee>();
+                var inscriptos = new List<InscritoDTO>();
                 Random random = new Random();
                 for (int i = 0; i < 10; i++)
                 {
-                    _employees.Add(new Employee()
+                    inscriptos.Add(new InscritoDTO()
                     {
-                        Id = i,
-                        Name = "Employee " + i,
-                        DOB = new DateTime(1999, 1, 1).AddMonths(i),
-                        Salary = random.Next(100, 10000)
+                        Id=i,
+                        Num_socio = i,
+                        Dni = 1000000 + i,
+                        Nombre = "Inscripto " + i,
+                        Email = "mail " + i,
+                        Telefono = 1000000 + i,
+                        Fecha_reg = "fecha ",
+                        Lugar = "lugar " + i,
+                        Horario = "horario " + i
                     });
                 }
 
-                report.CreateExcelDoc(@"D:\Report.xlsx", _employees);
+                report.CreateExcelDoc(@"D:\Report.xlsx", inscriptos);
+                ValidarExcel.validarExcel(@"D:\Report.xlsx");
 
             }
             catch (Exception e)
