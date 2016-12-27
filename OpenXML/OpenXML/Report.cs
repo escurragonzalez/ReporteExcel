@@ -6,15 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace OpenXML
 {
     public class Report
     {
-        public void CreateExcelDoc(string fileName, List<InscritoDTO> inscriptos)
-        {
-            using (SpreadsheetDocument document = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
+        public byte[] CreateExcelDoc(List<InscritoDTO> inscriptos)
+        {            
+            using (MemoryStream mem = new MemoryStream())
             {
+                SpreadsheetDocument document = SpreadsheetDocument.Create(mem, SpreadsheetDocumentType.Workbook);
                 WorkbookPart workbookPart = document.AddWorkbookPart();
                 workbookPart.Workbook = new Workbook();
 
@@ -36,7 +38,7 @@ namespace OpenXML
                 SheetDimension sheetDimension = new SheetDimension() { Reference = "A1:I1" };
 
                 SheetView sheetView = new SheetView() { TabSelected = true, WorkbookViewId = (UInt32Value)0U };
-                SheetFormatProperties sheetFormatoperties = worksheetPart.Worksheet.AppendChild(new SheetFormatProperties() { BaseColumnWidth = (UInt32Value)10U, DefaultRowHeight = 15D});
+                SheetFormatProperties sheetFormatoperties = worksheetPart.Worksheet.AppendChild(new SheetFormatProperties() { BaseColumnWidth = (UInt32Value)10U, DefaultRowHeight = 15D });
 
                 #region Cabecera
 
@@ -56,9 +58,9 @@ namespace OpenXML
                 columns1.Append(column4);
                 columns1.Append(column5);
                 columns1.Append(column6);
-                #endregion 
-                
-                Row row1 = new Row() { RowIndex = (UInt32Value)1U, Spans = new ListValue<StringValue>() { InnerText = "1:9" }};
+                #endregion
+
+                Row row1 = new Row() { RowIndex = (UInt32Value)1U, Spans = new ListValue<StringValue>() { InnerText = "1:9" } };
 
                 Cell cell1 = new Cell() { CellReference = "A1", DataType = CellValues.String };
                 CellValue cellValue1 = new CellValue();
@@ -129,9 +131,11 @@ namespace OpenXML
                 sheetData.AppendChild(row1);
                 cargarDatos(inscriptos, sheetData);
                 worksheetPart.Worksheet.AppendChild(sheetData);
-                PageSetup pageSetup1 = worksheetPart.Worksheet.AppendChild(new PageSetup() { Orientation = OrientationValues.Portrait, Id = "rId1" });
-
+                PageSetup pageSetup1 = worksheetPart.Worksheet.AppendChild(new PageSetup() { Orientation = OrientationValues.Portrait, Id = "rId1" });                
                 worksheetPart.Worksheet.Save();
+                mem.Seek(0, SeekOrigin.Begin);
+                document.Close();
+                return mem.ToArray();
             }
         }
 

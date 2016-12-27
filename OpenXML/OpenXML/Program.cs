@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace OpenXML
 {
@@ -31,9 +32,9 @@ namespace OpenXML
                     });
                 }
 
-                report.CreateExcelDoc(@"D:\Report.xlsx", inscriptos);
-                ValidarExcel.validarExcel(@"D:\Report.xlsx");
-
+                byte [] excel= report.CreateExcelDoc(inscriptos);
+                
+                File.WriteAllBytes(@"d:\Reporte.xlsx", excel);                 
             }
             catch (Exception e)
             {
