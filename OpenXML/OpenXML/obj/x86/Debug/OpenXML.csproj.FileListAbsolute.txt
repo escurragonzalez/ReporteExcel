@@ -5,3 +5,9 @@ D:\Desarrollo\OpenXML\OpenXML\bin\Debug\DocumentFormat.OpenXml.dll
 D:\Desarrollo\OpenXML\OpenXML\obj\x86\Debug\OpenXML.exe
 D:\Desarrollo\OpenXML\OpenXML\obj\x86\Debug\OpenXML.pdb
 D:\Desarrollo\OpenXML\OpenXML\obj\x86\Debug\OpenXML.csprojResolveAssemblyReference.cache
+D:\Git\ReporteExcel\OpenXML\OpenXML\bin\Debug\OpenXML.exe.config
+D:\Git\ReporteExcel\OpenXML\OpenXML\obj\x86\Debug\OpenXML.exe
+D:\Git\ReporteExcel\OpenXML\OpenXML\obj\x86\Debug\OpenXML.pdb
+D:\Git\ReporteExcel\OpenXML\OpenXML\bin\Debug\OpenXML.exe
+D:\Git\ReporteExcel\OpenXML\OpenXML\bin\Debug\OpenXML.pdb
+D:\Git\ReporteExcel\OpenXML\OpenXML\bin\Debug\DocumentFormat.OpenXml.dll
